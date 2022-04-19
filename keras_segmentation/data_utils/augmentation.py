@@ -14,6 +14,41 @@ IMAGE_AUGMENTATION_NUM_TRIES = 10
 loaded_augmentation_name = ""
 
 
+def _load_augmentation_aug_custom():
+    return iaa.OneOf([
+        #iaa.Sequential([iaa.Fliplr(0.5), iaa.Flipud(0.2)]),
+        #iaa.CropAndPad(percent=(-0.05, 0.1),
+         #              pad_mode='constant',
+         #              pad_cval=(0, 255)),
+        #iaa.Crop(percent=(0.0, 0.1)),
+        #iaa.Crop(percent=(0.3, 0.5)),
+        #iaa.Crop(percent=(0.3, 0.5)),
+        #iaa.Crop(percent=(0.3, 0.5)),
+        iaa.Sequential([
+            iaa.Affine(
+                    # scale images to 80-120% of their size,
+                    # individually per axis
+                    #scale={"x": (0.8, 1.2), "y": (0.8, 1.2)},
+                    #both axis the same
+          scale=(0.8, 1.2),
+                    # translate by -20 to +20 percent (per axis)
+                    #translate_percent={"x": (-0.2, 0.2), "y": (-0.2, 0.2)},
+                    #rotate=(-45, 45),  # rotate by -45 to +45 degrees
+                    #shear=(-16, 16),  # shear by -16 to +16 degrees
+                    # use nearest neighbour or bilinear interpolation (fast)
+                    #order=[0, 1],
+                    # if mode is constant, use a cval between 0 and 255
+                    #mode='constant',
+                    #cval=(0, 255),
+                    # use any of scikit-image's warping modes
+                    # (see 2nd image from the top for examples)
+            )])
+          #  iaa.Sometimes(0.3, iaa.Crop(percent=(0.3, 0.5)))]),
+       # iaa.Sometimes(0.4, iaa.Multiply((0.5, 1.1))),
+       # iaa.Sometimes(0.2, iaa.GaussianBlur(sigma=(0, 3.0))),
+    ])
+
+
 def _load_augmentation_aug_geometric():
     return iaa.OneOf([
         iaa.Sequential([iaa.Fliplr(0.5), iaa.Flipud(0.2)]),
@@ -184,7 +219,8 @@ augmentation_functions = {
     "aug_all": _load_augmentation_aug_all,
     "aug_all2": _load_augmentation_aug_all2,
     "aug_geometric": _load_augmentation_aug_geometric,
-    "aug_non_geometric": _load_augmentation_aug_non_geometric
+    "aug_non_geometric": _load_augmentation_aug_non_geometric,
+    "aug_custom":_load_augmentation_aug_custom
 }
 
 

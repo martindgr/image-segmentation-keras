@@ -1,3 +1,7 @@
+# Changes for PMT segmentation studies:
+* train.py now returns history object for plotting training progress
+* added custom aug augment to augmentation.py  for making augments specific to PMTs
+
 # Image Segmentation Keras : Implementation of Segnet, FCN, UNet, PSPNet and other models in Keras.
 
 [![PyPI version](https://badge.fury.io/py/keras-segmentation.svg)](https://badge.fury.io/py/keras-segmentation)
